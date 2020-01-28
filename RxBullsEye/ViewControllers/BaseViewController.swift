@@ -39,22 +39,22 @@ class BaseViewController: UIViewController {
         
         switch type {
         case .start:
-            imageName = "play"
+            imageName = "play.fill"
             
         case .hallOfFame:
-            imageName = "list"
+            imageName = "list.number"
             
         case .register:
-            imageName = "register"
+            imageName = "pencil"
             
         case .cancel:
-            imageName = "cancel"
+            imageName = "xmark"
             
         case .done:
-            imageName = "done"
+            imageName = "checkmark"
         }
         
-        button.setImage(UIImage(named: imageName), for: .normal)
+        button.setImage(UIImage(systemName: imageName), for: .normal)
         let barButtonItem = UIBarButtonItem(customView: button)
         
         switch side {
