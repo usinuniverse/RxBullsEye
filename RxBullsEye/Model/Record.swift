@@ -20,6 +20,17 @@ struct Record: IdentifiableType, Equatable {
         self.score = score
         self.identity = UUID().uuidString
     }
+    
+    init(dictionary: [String: Any]) {
+        self.name = dictionary["name"] as? String ?? ""
+        self.score = dictionary["score"] as? Int ?? 0
+        self.identity = dictionary["identity"] as? String ?? UUID().uuidString
+    }
+    
+    func convertToDict() -> [String: Any] {
+        return ["name": self.name, "score": self.score, "identity": self.identity]
+    }
+    
 }
 
 struct SectionOfRecord {

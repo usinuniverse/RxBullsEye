@@ -13,11 +13,13 @@ class UserDefaultsService: UserDefaultsServiceType {
     
     enum Key: String {
         case hallOfFame
+        case name
     }
     
     // MARK: - Properties
     
     var serviceProvider: ServiceProviderType
+    
     private var userDefaults = UserDefaults.standard
     
     // MARK: - Initialization
