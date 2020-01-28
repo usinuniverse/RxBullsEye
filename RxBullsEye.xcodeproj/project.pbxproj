@@ -16,6 +16,7 @@
 		0983447023DFD819005134E4 /* ServiceProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983446F23DFD819005134E4 /* ServiceProviderType.swift */; };
 		0983447223DFD850005134E4 /* UserDefaultsServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983447123DFD850005134E4 /* UserDefaultsServiceType.swift */; };
 		0983447423DFD867005134E4 /* HallOfFameServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983447323DFD867005134E4 /* HallOfFameServiceType.swift */; };
+		0983447923DFDB8F005134E4 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983447823DFDB8F005134E4 /* UserDefaultsService.swift */; };
 		DEE230EC1BC33C72FB18C8B0 /* Pods_RxBullsEye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5D3A4B305F8DFFDF8C1C97 /* Pods_RxBullsEye.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		0983446F23DFD819005134E4 /* ServiceProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderType.swift; sourceTree = "<group>"; };
 		0983447123DFD850005134E4 /* UserDefaultsServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsServiceType.swift; sourceTree = "<group>"; };
 		0983447323DFD867005134E4 /* HallOfFameServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HallOfFameServiceType.swift; sourceTree = "<group>"; };
+		0983447823DFDB8F005134E4 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		3A430E62196C5270CCE21030 /* Pods-RxBullsEye.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxBullsEye.debug.xcconfig"; path = "Target Support Files/Pods-RxBullsEye/Pods-RxBullsEye.debug.xcconfig"; sourceTree = "<group>"; };
 		6A5D3A4B305F8DFFDF8C1C97 /* Pods_RxBullsEye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxBullsEye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F852ED93C701D3B856E0BF6B /* Pods-RxBullsEye.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxBullsEye.release.xcconfig"; path = "Target Support Files/Pods-RxBullsEye/Pods-RxBullsEye.release.xcconfig"; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				0983447123DFD850005134E4 /* UserDefaultsServiceType.swift */,
+				0983447823DFDB8F005134E4 /* UserDefaultsService.swift */,
 			);
 			path = UserDefaultsService;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				0983447223DFD850005134E4 /* UserDefaultsServiceType.swift in Sources */,
 				0983447023DFD819005134E4 /* ServiceProviderType.swift in Sources */,
 				0983447423DFD867005134E4 /* HallOfFameServiceType.swift in Sources */,
+				0983447923DFDB8F005134E4 /* UserDefaultsService.swift in Sources */,
 				0983446E23DFD418005134E4 /* Record.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
