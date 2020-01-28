@@ -51,7 +51,7 @@ class GameRoomViewReactor: Reactor {
     func mutate(action: GameRoomViewReactor.Action) -> Observable<GameRoomViewReactor.Mutation> {
         switch action {
         case .start:
-            return Observable.just(.startGame(Int.random(in: 99...100)))
+            return Observable.just(.startGame(Int.random(in: 1...100)))
             
         case .sliderValueChanged(let value):
             return Observable.just(.setSlider(value))
