@@ -27,6 +27,8 @@ class HallOfFameViewReactor: Reactor {
         var records = [SectionOfRecord]()
     }
     
+    // MARK: - Properties
+    
     var initialState = State()
     
     var serviceProvider: ServiceProviderType
@@ -68,6 +70,10 @@ class HallOfFameViewReactor: Reactor {
         }
         
         return state
+    }
+    
+    func createRegisterViewReactor() -> RegisterViewReactor {
+        return RegisterViewReactor(serviceProvider: self.serviceProvider)
     }
     
 }

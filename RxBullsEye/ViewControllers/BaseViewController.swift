@@ -17,6 +17,8 @@ class BaseViewController: UIViewController {
         case start
         case hallOfFame
         case register
+        case cancel
+        case done
     }
     
     enum NavigationBarSide {
@@ -44,6 +46,12 @@ class BaseViewController: UIViewController {
             
         case .register:
             imageName = "register"
+            
+        case .cancel:
+            imageName = "cancel"
+            
+        case .done:
+            imageName = "done"
         }
         
         button.setImage(UIImage(named: imageName), for: .normal)

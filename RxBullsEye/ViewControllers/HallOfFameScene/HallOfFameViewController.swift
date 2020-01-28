@@ -57,6 +57,15 @@ class HallOfFameViewController: BaseViewController, StoryboardView {
             .disposed(by: self.disposeBag)
         
         // Action
+        let registerButton = self.setNavigationBarButton(type: .register, at: .right)
+        registerButton.rx.tap
+            .map { reactor.createRegisterViewReactor() }
+            .subscribe(onNext: { [weak self] reactor in
+                let registerViewController = ViewControllers.register(reactor).instantiate()
+                self?.present(registerViewController, animated: true)
+            })
+            .disposed(by: self.disposeBag)
+        
         Observable.just(())
             .map { Reactor.Action.refresh }
             .bind(to: reactor.action)

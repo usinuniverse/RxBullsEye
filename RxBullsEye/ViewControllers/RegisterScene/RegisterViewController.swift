@@ -11,6 +11,11 @@ import UIKit
 import ReactorKit
 
 class RegisterViewController: BaseViewController, StoryboardView {
+    // MARK: - Properites
+    // MARK: IBOutlet
+    
+    @IBOutlet private weak var textField: UITextField!
+    
     // MARK: - Methods
     // MARK: View Life Cycle
     
@@ -21,7 +26,27 @@ class RegisterViewController: BaseViewController, StoryboardView {
     // MARK: Bind
     
     func bind(reactor: RegisterViewReactor) {
+        // Action
+        let cancelButton = self.setNavigationBarButton(type: .cancel, at: .left)
+        cancelButton.rx.tap
+            .map { Reactor.Action.cancel }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
         
+        let doneButton = self.setNavigationBarButton(type: .done, at: .right)
+        doneButton.rx.tap
+            .map { Reactor.Action.done(self.textField.text ?? "") }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+        
+        // State
+        reactor.state.map { $0.isDismiss }
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] isDismiss in
+                guard isDismiss else { return }
+                self?.dismiss(animated: true)
+            })
+            .disposed(by: self.disposeBag)
     }
     
 }
