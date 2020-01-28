@@ -39,6 +39,12 @@ class RegisterViewController: BaseViewController, StoryboardView {
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
         
+        self.textField.rx.text.changed
+            .distinctUntilChanged()
+            .map { Reactor.Action.textChanged($0) }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+        
         // State
         reactor.state.map { $0.isDismiss }
             .distinctUntilChanged()
@@ -46,6 +52,11 @@ class RegisterViewController: BaseViewController, StoryboardView {
                 guard isDismiss else { return }
                 self?.dismiss(animated: true)
             })
+            .disposed(by: self.disposeBag)
+        
+        reactor.state.map { $0.isEnableDone }
+            .distinctUntilChanged()
+            .bind(to: doneButton.rx.isEnabled)
             .disposed(by: self.disposeBag)
     }
     

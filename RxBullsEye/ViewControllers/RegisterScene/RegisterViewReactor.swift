@@ -49,9 +49,9 @@ class RegisterViewReactor: Reactor {
             
         case .textChanged(let text):
             if text != nil && text != "" {
-                return Observable.just(.setIsEnableDone(false))
-            } else {
                 return Observable.just(.setIsEnableDone(true))
+            } else {
+                return Observable.just(.setIsEnableDone(false))
             }
             
         case .done(let name):
