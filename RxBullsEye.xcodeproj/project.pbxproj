@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0983445023DFCFBD005134E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983444F23DFCFBD005134E4 /* AppDelegate.swift */; };
-		0983445223DFCFBD005134E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983445123DFCFBD005134E4 /* SceneDelegate.swift */; };
 		0983445423DFCFBD005134E4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983445323DFCFBD005134E4 /* ViewController.swift */; };
 		0983445723DFCFBD005134E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0983445523DFCFBD005134E4 /* Main.storyboard */; };
 		0983445923DFCFBF005134E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0983445823DFCFBF005134E4 /* Assets.xcassets */; };
@@ -19,7 +18,6 @@
 /* Begin PBXFileReference section */
 		0983444C23DFCFBD005134E4 /* RxBullsEye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxBullsEye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0983444F23DFCFBD005134E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0983445123DFCFBD005134E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0983445323DFCFBD005134E4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0983445623DFCFBD005134E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0983445823DFCFBF005134E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,7 +62,6 @@
 			isa = PBXGroup;
 			children = (
 				0983444F23DFCFBD005134E4 /* AppDelegate.swift */,
-				0983445123DFCFBD005134E4 /* SceneDelegate.swift */,
 				0983445323DFCFBD005134E4 /* ViewController.swift */,
 				0983445523DFCFBD005134E4 /* Main.storyboard */,
 				0983445823DFCFBF005134E4 /* Assets.xcassets */,
@@ -88,7 +85,6 @@
 				3A430E62196C5270CCE21030 /* Pods-RxBullsEye.debug.xcconfig */,
 				F852ED93C701D3B856E0BF6B /* Pods-RxBullsEye.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -209,7 +205,6 @@
 			files = (
 				0983445423DFCFBD005134E4 /* ViewController.swift in Sources */,
 				0983445023DFCFBD005134E4 /* AppDelegate.swift in Sources */,
-				0983445223DFCFBD005134E4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +352,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3RSU74M489;
 				INFOPLIST_FILE = RxBullsEye/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -364,7 +360,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.bitbucket.usinuniverse.RxBullsEye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -376,6 +372,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3RSU74M489;
 				INFOPLIST_FILE = RxBullsEye/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -383,7 +380,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.bitbucket.usinuniverse.RxBullsEye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
