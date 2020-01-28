@@ -16,7 +16,7 @@ class RegisterViewReactor: Reactor {
         case viewDidLoad
         case cancel
         case textChanged(String?)
-        case done(String)
+        case done
     }
     
     enum Mutation {
@@ -61,8 +61,8 @@ class RegisterViewReactor: Reactor {
                 return Observable.of(.setName(""), .setIsEnableDone(false))
             }
             
-        case .done(let name):
-            return self.serviceProvider.hallOfFameService.update(name: name)
+        case .done:
+            return self.serviceProvider.hallOfFameService.update(name: self.currentState.name)
                 .flatMap { _ -> Observable<Mutation> in
                     return Observable.just(.dismiss)
             }

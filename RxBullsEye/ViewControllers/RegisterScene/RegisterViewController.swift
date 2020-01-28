@@ -41,7 +41,7 @@ class RegisterViewController: BaseViewController, StoryboardView {
         
         let doneButton = self.setNavigationBarButton(type: .done, at: .right)
         doneButton.rx.tap
-            .map { Reactor.Action.done(self.textField.text ?? "") }
+            .map { Reactor.Action.done }
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
         
