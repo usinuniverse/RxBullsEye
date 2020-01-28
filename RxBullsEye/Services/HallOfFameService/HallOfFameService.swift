@@ -26,7 +26,7 @@ class HallOfFameService: HallOfFameServiceType {
             .flatMap { [weak self] records -> Observable<Record> in
                 var records = records
                 records.append(record)
-                records.sort { $0.score < $1.score }
+                records.sort { $0.score > $1.score }
                 self?.serviceProvider.userDefaultsService.set(value: records.map({ $0.convertToDict() }), forKey: UserDefaultsService.Key.hallOfFame.rawValue)
                 return Observable.just(record)
         }
