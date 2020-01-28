@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -85,16 +84,32 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNR-3E-fT3">
+                                        <rect key="frame" x="398" y="8" width="8" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Previous number is" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8w-V3-gYN">
+                                        <rect key="frame" x="244" y="8" width="146" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstItem="1m1-WM-X4V" firstAttribute="centerX" secondItem="DFj-f7-aE8" secondAttribute="centerX" id="1B1-Ru-vyB"/>
                                     <constraint firstItem="gbl-UJ-GlY" firstAttribute="leading" secondItem="DFj-f7-aE8" secondAttribute="leading" constant="8" id="6ja-AS-pbh"/>
+                                    <constraint firstAttribute="trailing" secondItem="GNR-3E-fT3" secondAttribute="trailing" constant="8" id="92U-Zo-Hmr"/>
                                     <constraint firstItem="UU8-0c-cSd" firstAttribute="leading" secondItem="gbl-UJ-GlY" secondAttribute="trailing" constant="8" id="HDF-ZO-IVa"/>
+                                    <constraint firstItem="GNR-3E-fT3" firstAttribute="leading" secondItem="w8w-V3-gYN" secondAttribute="trailing" constant="8" id="IBe-iu-cZM"/>
                                     <constraint firstItem="wDA-1a-JUF" firstAttribute="centerX" secondItem="DFj-f7-aE8" secondAttribute="centerX" id="M1c-dC-4HL"/>
                                     <constraint firstItem="wDA-1a-JUF" firstAttribute="top" secondItem="1m1-WM-X4V" secondAttribute="bottom" constant="8" id="VtV-hF-8AN"/>
                                     <constraint firstItem="wDA-1a-JUF" firstAttribute="centerY" secondItem="DFj-f7-aE8" secondAttribute="centerY" id="WmJ-08-7Nh"/>
                                     <constraint firstItem="gbl-UJ-GlY" firstAttribute="top" secondItem="DFj-f7-aE8" secondAttribute="top" constant="8" id="aef-hz-uQA"/>
+                                    <constraint firstItem="w8w-V3-gYN" firstAttribute="top" secondItem="DFj-f7-aE8" secondAttribute="top" constant="8" id="rtz-cs-RKv"/>
+                                    <constraint firstItem="GNR-3E-fT3" firstAttribute="top" secondItem="DFj-f7-aE8" secondAttribute="top" constant="8" id="vr7-MR-RoG"/>
                                     <constraint firstItem="UU8-0c-cSd" firstAttribute="top" secondItem="DFj-f7-aE8" secondAttribute="top" constant="8" id="x48-mn-Q3j"/>
                                 </constraints>
                             </view>
@@ -128,6 +143,7 @@
                         <outlet property="checkButton" destination="1Gy-ib-HVs" id="p5l-fb-RMw"/>
                         <outlet property="countLabel" destination="UU8-0c-cSd" id="M5b-qt-2bV"/>
                         <outlet property="goalNumberLabel" destination="wDA-1a-JUF" id="2tl-rY-Qfs"/>
+                        <outlet property="previousNumberLabel" destination="GNR-3E-fT3" id="6xa-ts-sZ0"/>
                         <outlet property="slider" destination="mtb-Df-8JQ" id="Ju3-Qq-xLG"/>
                     </connections>
                 </viewController>

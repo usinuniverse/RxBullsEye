@@ -17,6 +17,7 @@ class GameRoomViewController: BaseViewController, StoryboardView {
     // MARK: IBOutlet
     
     @IBOutlet private weak var countLabel: UILabel!
+    @IBOutlet private weak var previousNumberLabel: UILabel!
     @IBOutlet private weak var goalNumberLabel: UILabel!
     @IBOutlet private weak var slider: UISlider!
     @IBOutlet private weak var checkButton: UIButton!
@@ -65,6 +66,10 @@ class GameRoomViewController: BaseViewController, StoryboardView {
         
         reactor.state.map { "\($0.count)" }
             .bind(to: self.countLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        reactor.state.map { "\($0.previousNumber)" }
+            .bind(to: self.previousNumberLabel.rx.text)
             .disposed(by: self.disposeBag)
         
         reactor.state.map { "\($0.goalNumber)" }

@@ -21,6 +21,7 @@ class GameRoomViewReactor: Reactor {
     enum Mutation {
         case startGame(Int)
         case increaseCount
+        case setPreviousNumber(Int)
         case setSlider(Float)
         case endGame
     }
@@ -30,6 +31,7 @@ class GameRoomViewReactor: Reactor {
         var isPlaying = false
         var goalNumber = 0
         var count = 0
+        var previousNumber = 0
         var sliderValue: Float = 50
         var isFinish = false
     }
@@ -64,7 +66,7 @@ class GameRoomViewReactor: Reactor {
                         return Observable.just(.endGame)
                 }
             } else {
-                return Observable.of(.increaseCount, .setSlider(50))
+                return Observable.of(.increaseCount, .setSlider(50), .setPreviousNumber(Int(self.currentState.sliderValue)))
             }
         }
     }
@@ -84,6 +86,9 @@ class GameRoomViewReactor: Reactor {
             
         case .increaseCount:
             state.count += 1
+            
+        case .setPreviousNumber(let previousNumber):
+            state.previousNumber = previousNumber
             
         case .endGame:
             state.isPlaying = false
