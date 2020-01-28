@@ -13,19 +13,22 @@ class RegisterViewReactor: Reactor {
     // MARK: - Enum
     
     enum Action {
+        case viewDidLoad
         case cancel
         case textChanged(String?)
         case done(String)
     }
     
     enum Mutation {
+        case setName(String)
         case dismiss
         case setIsEnableDone(Bool)
     }
     
     struct State {
         var isDismiss = false
-        var isEnableDone = false
+        var isEnableDone = true
+        var name = ""
     }
     
     // MARK: - Properties
@@ -44,6 +47,10 @@ class RegisterViewReactor: Reactor {
     
     func mutate(action: RegisterViewReactor.Action) -> Observable<RegisterViewReactor.Mutation> {
         switch action {
+        case .viewDidLoad:
+            let name = self.serviceProvider.userDefaultsService.value(forKey: UserDefaultsService.Key.name.rawValue) as? String ?? "Guest"
+            return Observable.just(.setName(name))
+        
         case .cancel:
             return Observable.just(.dismiss)
             
@@ -66,6 +73,9 @@ class RegisterViewReactor: Reactor {
         var state = state
         
         switch mutation {
+        case .setName(let name):
+            state.name = name
+            
         case .dismiss:
             state.isDismiss = true
             

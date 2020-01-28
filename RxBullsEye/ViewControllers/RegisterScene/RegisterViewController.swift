@@ -9,6 +9,7 @@
 import UIKit
 
 import ReactorKit
+import RxSwift
 
 class RegisterViewController: BaseViewController, StoryboardView {
     // MARK: - Properites
@@ -27,6 +28,11 @@ class RegisterViewController: BaseViewController, StoryboardView {
     
     func bind(reactor: RegisterViewReactor) {
         // Action
+        Observable.just(())
+            .map { Reactor.Action.viewDidLoad }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+        
         let cancelButton = self.setNavigationBarButton(type: .cancel, at: .left)
         cancelButton.rx.tap
             .map { Reactor.Action.cancel }
@@ -46,6 +52,10 @@ class RegisterViewController: BaseViewController, StoryboardView {
             .disposed(by: self.disposeBag)
         
         // State
+        reactor.state.map { $0.name }
+            .bind(to: self.textField.rx.text)
+            .disposed(by: self.disposeBag)
+        
         reactor.state.map { $0.isDismiss }
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] isDismiss in
