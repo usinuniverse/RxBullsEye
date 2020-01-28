@@ -35,14 +35,16 @@ struct Record: IdentifiableType, Equatable {
 
 struct SectionOfRecord {
     var items: [Item]
+    var identity: String
+    
+    init(items: [Item]) {
+        self.items = items
+        self.identity = UUID().uuidString
+    }
 }
 
 extension SectionOfRecord: AnimatableSectionModelType {
     typealias Item = Record
-    
-    var identity: String {
-        return UUID().uuidString
-    }
     
     init(original: SectionOfRecord, items: [Item]) {
         self = original

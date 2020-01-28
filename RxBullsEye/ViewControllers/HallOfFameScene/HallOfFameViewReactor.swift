@@ -58,6 +58,25 @@ class HallOfFameViewReactor: Reactor {
         }
     }
     
+    func mutate(event: HallOfFameEvent) -> Observable<HallOfFameViewReactor.Mutation> {
+        switch event {
+        case .update:
+            return self.serviceProvider.hallOfFameService.read()
+                .flatMap { records -> Observable<Mutation> in
+                    let sectionOfRecord = SectionOfRecord(items: records)
+                    return Observable.just(.setRecords([sectionOfRecord]))
+            }
+        }
+    }
+    
+    func transform(mutation: Observable<HallOfFameViewReactor.Mutation>) -> Observable<HallOfFameViewReactor.Mutation> {
+        let hallOfFameEvent = self.serviceProvider.hallOfFameService.event
+            .flatMap { [weak self] event -> Observable<Mutation> in
+                self?.mutate(event: event) ?? .empty()
+        }
+        return Observable.of(mutation, hallOfFameEvent).merge()
+    }
+    
     func reduce(state: HallOfFameViewReactor.State, mutation: HallOfFameViewReactor.Mutation) -> HallOfFameViewReactor.State {
         var state = state
         
