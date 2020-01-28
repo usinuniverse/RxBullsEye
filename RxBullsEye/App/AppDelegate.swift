@@ -14,6 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let serviceProvider = ServiceProvider()
+        let reactor = GameRoomViewReactor(serviceProvider: serviceProvider)
+        let gameRoomViewController = ViewControllers.gameRoom(reactor).instantiate()
+        self.window?.rootViewController = gameRoomViewController
         return true
     }
     

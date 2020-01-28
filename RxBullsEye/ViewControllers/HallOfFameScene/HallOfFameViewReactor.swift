@@ -14,5 +14,11 @@ class HallOfFameViewReactor: Reactor {
     struct State {}
     
     var initialState = State()
+    
+    var serviceProvider: ServiceProviderType
+    
+    init(serviceProvider: ServiceProviderType) {
+        self.serviceProvider = serviceProvider
+    }
 }
 
