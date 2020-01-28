@@ -68,7 +68,8 @@ class GameRoomViewController: BaseViewController, StoryboardView {
             .bind(to: self.countLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        reactor.state.map { "\($0.previousNumber)" }
+        reactor.state.map { $0.previousNumber == 0 ? "-" : "\($0.previousNumber)" }
+            .distinctUntilChanged()
             .bind(to: self.previousNumberLabel.rx.text)
             .disposed(by: self.disposeBag)
         

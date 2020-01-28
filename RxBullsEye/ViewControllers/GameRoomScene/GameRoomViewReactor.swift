@@ -78,6 +78,7 @@ class GameRoomViewReactor: Reactor {
             state.isPlaying = true
             state.goalNumber = goalNumber
             state.count = 1
+            state.previousNumber = 0
             state.sliderValue = 50
             state.isFinish = false
             
