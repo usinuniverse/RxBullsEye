@@ -20,6 +20,13 @@
 		0983447B23DFDC97005134E4 /* HallOfFameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983447A23DFDC97005134E4 /* HallOfFameService.swift */; };
 		0983447D23DFECA1005134E4 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983447C23DFECA1005134E4 /* ServiceProvider.swift */; };
 		0983447F23DFED46005134E4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983447E23DFED45005134E4 /* BaseViewController.swift */; };
+		0983448423DFF2B1005134E4 /* ViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983448323DFF2B1005134E4 /* ViewControllers.swift */; };
+		0983448623DFF351005134E4 /* GameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983448523DFF351005134E4 /* GameRoomViewController.swift */; };
+		0983448823DFF35F005134E4 /* HallOfFameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983448723DFF35F005134E4 /* HallOfFameViewController.swift */; };
+		0983448A23DFF368005134E4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983448923DFF368005134E4 /* RegisterViewController.swift */; };
+		0983448C23DFF379005134E4 /* GameRoomViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983448B23DFF379005134E4 /* GameRoomViewReactor.swift */; };
+		0983448E23DFF382005134E4 /* HallOfFameViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983448D23DFF382005134E4 /* HallOfFameViewReactor.swift */; };
+		0983449023DFF38A005134E4 /* RegisterViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983448F23DFF38A005134E4 /* RegisterViewReactor.swift */; };
 		DEE230EC1BC33C72FB18C8B0 /* Pods_RxBullsEye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5D3A4B305F8DFFDF8C1C97 /* Pods_RxBullsEye.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +46,13 @@
 		0983447A23DFDC97005134E4 /* HallOfFameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HallOfFameService.swift; sourceTree = "<group>"; };
 		0983447C23DFECA1005134E4 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		0983447E23DFED45005134E4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		0983448323DFF2B1005134E4 /* ViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllers.swift; sourceTree = "<group>"; };
+		0983448523DFF351005134E4 /* GameRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRoomViewController.swift; sourceTree = "<group>"; };
+		0983448723DFF35F005134E4 /* HallOfFameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HallOfFameViewController.swift; sourceTree = "<group>"; };
+		0983448923DFF368005134E4 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		0983448B23DFF379005134E4 /* GameRoomViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRoomViewReactor.swift; sourceTree = "<group>"; };
+		0983448D23DFF382005134E4 /* HallOfFameViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HallOfFameViewReactor.swift; sourceTree = "<group>"; };
+		0983448F23DFF38A005134E4 /* RegisterViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewReactor.swift; sourceTree = "<group>"; };
 		3A430E62196C5270CCE21030 /* Pods-RxBullsEye.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxBullsEye.debug.xcconfig"; path = "Target Support Files/Pods-RxBullsEye/Pods-RxBullsEye.debug.xcconfig"; sourceTree = "<group>"; };
 		6A5D3A4B305F8DFFDF8C1C97 /* Pods_RxBullsEye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxBullsEye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F852ED93C701D3B856E0BF6B /* Pods-RxBullsEye.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxBullsEye.release.xcconfig"; path = "Target Support Files/Pods-RxBullsEye/Pods-RxBullsEye.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,7 +131,11 @@
 			isa = PBXGroup;
 			children = (
 				0983445523DFCFBD005134E4 /* Main.storyboard */,
+				0983448323DFF2B1005134E4 /* ViewControllers.swift */,
 				0983447E23DFED45005134E4 /* BaseViewController.swift */,
+				0983448223DFF26B005134E4 /* GameRoomScene */,
+				0983448123DFF269005134E4 /* HallOfFameScene */,
+				0983448023DFF266005134E4 /* RegisterScene */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -181,6 +199,33 @@
 				0983447A23DFDC97005134E4 /* HallOfFameService.swift */,
 			);
 			path = HallOfFameService;
+			sourceTree = "<group>";
+		};
+		0983448023DFF266005134E4 /* RegisterScene */ = {
+			isa = PBXGroup;
+			children = (
+				0983448923DFF368005134E4 /* RegisterViewController.swift */,
+				0983448F23DFF38A005134E4 /* RegisterViewReactor.swift */,
+			);
+			path = RegisterScene;
+			sourceTree = "<group>";
+		};
+		0983448123DFF269005134E4 /* HallOfFameScene */ = {
+			isa = PBXGroup;
+			children = (
+				0983448723DFF35F005134E4 /* HallOfFameViewController.swift */,
+				0983448D23DFF382005134E4 /* HallOfFameViewReactor.swift */,
+			);
+			path = HallOfFameScene;
+			sourceTree = "<group>";
+		};
+		0983448223DFF26B005134E4 /* GameRoomScene */ = {
+			isa = PBXGroup;
+			children = (
+				0983448523DFF351005134E4 /* GameRoomViewController.swift */,
+				0983448B23DFF379005134E4 /* GameRoomViewReactor.swift */,
+			);
+			path = GameRoomScene;
 			sourceTree = "<group>";
 		};
 		76FFCDD580362E48F1B3AFD1 /* Frameworks */ = {
@@ -315,14 +360,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0983448E23DFF382005134E4 /* HallOfFameViewReactor.swift in Sources */,
 				0983446C23DFD25C005134E4 /* ReusableType.swift in Sources */,
 				0983445023DFCFBD005134E4 /* AppDelegate.swift in Sources */,
 				0983447B23DFDC97005134E4 /* HallOfFameService.swift in Sources */,
 				0983447D23DFECA1005134E4 /* ServiceProvider.swift in Sources */,
 				0983447223DFD850005134E4 /* UserDefaultsServiceType.swift in Sources */,
 				0983447F23DFED46005134E4 /* BaseViewController.swift in Sources */,
+				0983448823DFF35F005134E4 /* HallOfFameViewController.swift in Sources */,
+				0983448C23DFF379005134E4 /* GameRoomViewReactor.swift in Sources */,
+				0983449023DFF38A005134E4 /* RegisterViewReactor.swift in Sources */,
 				0983447023DFD819005134E4 /* ServiceProviderType.swift in Sources */,
 				0983447423DFD867005134E4 /* HallOfFameServiceType.swift in Sources */,
+				0983448A23DFF368005134E4 /* RegisterViewController.swift in Sources */,
+				0983448423DFF2B1005134E4 /* ViewControllers.swift in Sources */,
+				0983448623DFF351005134E4 /* GameRoomViewController.swift in Sources */,
 				0983447923DFDB8F005134E4 /* UserDefaultsService.swift in Sources */,
 				0983446E23DFD418005134E4 /* Record.swift in Sources */,
 			);
