@@ -11,6 +11,11 @@ import UIKit
 import ReactorKit
 
 class HallOfFameViewController: BaseViewController, StoryboardView {
+    // MARK: - Properties
+    // MARK: IBOutlet
+    
+    @IBOutlet private weak var tableView: UITableView!
+    
     // MARK: - Methods
     // MARK: View Life Cycle
     

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0913518E23E016F1004C8470 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913518C23E016F1004C8470 /* RecordTableViewCell.swift */; };
+		0913518F23E016F1004C8470 /* RecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0913518D23E016F1004C8470 /* RecordTableViewCell.xib */; };
+		0913519123E01835004C8470 /* RecordTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913519023E01835004C8470 /* RecordTableHeaderView.swift */; };
+		0913519323E01853004C8470 /* RecordTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0913519223E01853004C8470 /* RecordTableHeaderView.xib */; };
 		0983445023DFCFBD005134E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983444F23DFCFBD005134E4 /* AppDelegate.swift */; };
 		0983445723DFCFBD005134E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0983445523DFCFBD005134E4 /* Main.storyboard */; };
 		0983445923DFCFBF005134E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0983445823DFCFBF005134E4 /* Assets.xcassets */; };
@@ -31,6 +35,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0913518C23E016F1004C8470 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
+		0913518D23E016F1004C8470 /* RecordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordTableViewCell.xib; sourceTree = "<group>"; };
+		0913519023E01835004C8470 /* RecordTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableHeaderView.swift; sourceTree = "<group>"; };
+		0913519223E01853004C8470 /* RecordTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordTableHeaderView.xib; sourceTree = "<group>"; };
 		0983444C23DFCFBD005134E4 /* RxBullsEye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxBullsEye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0983444F23DFCFBD005134E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0983445623DFCFBD005134E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -70,6 +78,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0913518A23E016C4004C8470 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0913518C23E016F1004C8470 /* RecordTableViewCell.swift */,
+				0913518D23E016F1004C8470 /* RecordTableViewCell.xib */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		0913518B23E016CF004C8470 /* TableViewHeader */ = {
+			isa = PBXGroup;
+			children = (
+				0913519023E01835004C8470 /* RecordTableHeaderView.swift */,
+				0913519223E01853004C8470 /* RecordTableHeaderView.xib */,
+			);
+			path = TableViewHeader;
+			sourceTree = "<group>";
+		};
 		0983444323DFCFBD005134E4 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +149,8 @@
 		0983446523DFD137005134E4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0913518B23E016CF004C8470 /* TableViewHeader */,
+				0913518A23E016C4004C8470 /* TableViewCell */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -307,6 +335,8 @@
 			files = (
 				0983445C23DFCFBF005134E4 /* LaunchScreen.storyboard in Resources */,
 				0983445923DFCFBF005134E4 /* Assets.xcassets in Resources */,
+				0913519323E01853004C8470 /* RecordTableHeaderView.xib in Resources */,
+				0913518F23E016F1004C8470 /* RecordTableViewCell.xib in Resources */,
 				0983445723DFCFBD005134E4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,11 +392,13 @@
 			files = (
 				0983448E23DFF382005134E4 /* HallOfFameViewReactor.swift in Sources */,
 				0983446C23DFD25C005134E4 /* ReusableType.swift in Sources */,
+				0913518E23E016F1004C8470 /* RecordTableViewCell.swift in Sources */,
 				0983445023DFCFBD005134E4 /* AppDelegate.swift in Sources */,
 				0983447B23DFDC97005134E4 /* HallOfFameService.swift in Sources */,
 				0983447D23DFECA1005134E4 /* ServiceProvider.swift in Sources */,
 				0983447223DFD850005134E4 /* UserDefaultsServiceType.swift in Sources */,
 				0983447F23DFED46005134E4 /* BaseViewController.swift in Sources */,
+				0913519123E01835004C8470 /* RecordTableHeaderView.swift in Sources */,
 				0983448823DFF35F005134E4 /* HallOfFameViewController.swift in Sources */,
 				0983448C23DFF379005134E4 /* GameRoomViewReactor.swift in Sources */,
 				0983449023DFF38A005134E4 /* RegisterViewReactor.swift in Sources */,

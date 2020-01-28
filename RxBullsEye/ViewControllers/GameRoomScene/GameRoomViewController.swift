@@ -14,6 +14,7 @@ import RxUIAlert
 
 class GameRoomViewController: BaseViewController, StoryboardView {
     // MARK: - Properties
+    // MARK: IBOutlet
     
     @IBOutlet private weak var countLabel: UILabel!
     @IBOutlet private weak var goalNumberLabel: UILabel!
