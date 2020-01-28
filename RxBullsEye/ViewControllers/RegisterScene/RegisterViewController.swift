@@ -53,6 +53,7 @@ class RegisterViewController: BaseViewController, StoryboardView {
         
         // State
         reactor.state.map { $0.name }
+            .distinctUntilChanged()
             .bind(to: self.textField.rx.text)
             .disposed(by: self.disposeBag)
         
