@@ -13,6 +13,9 @@
 		0983445C23DFCFBF005134E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0983445A23DFCFBF005134E4 /* LaunchScreen.storyboard */; };
 		0983446C23DFD25C005134E4 /* ReusableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983446B23DFD25C005134E4 /* ReusableType.swift */; };
 		0983446E23DFD418005134E4 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983446D23DFD418005134E4 /* Record.swift */; };
+		0983447023DFD819005134E4 /* ServiceProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983446F23DFD819005134E4 /* ServiceProviderType.swift */; };
+		0983447223DFD850005134E4 /* UserDefaultsServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983447123DFD850005134E4 /* UserDefaultsServiceType.swift */; };
+		0983447423DFD867005134E4 /* HallOfFameServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0983447323DFD867005134E4 /* HallOfFameServiceType.swift */; };
 		DEE230EC1BC33C72FB18C8B0 /* Pods_RxBullsEye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5D3A4B305F8DFFDF8C1C97 /* Pods_RxBullsEye.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +28,9 @@
 		0983445D23DFCFBF005134E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0983446B23DFD25C005134E4 /* ReusableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableType.swift; sourceTree = "<group>"; };
 		0983446D23DFD418005134E4 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		0983446F23DFD819005134E4 /* ServiceProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderType.swift; sourceTree = "<group>"; };
+		0983447123DFD850005134E4 /* UserDefaultsServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsServiceType.swift; sourceTree = "<group>"; };
+		0983447323DFD867005134E4 /* HallOfFameServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HallOfFameServiceType.swift; sourceTree = "<group>"; };
 		3A430E62196C5270CCE21030 /* Pods-RxBullsEye.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxBullsEye.debug.xcconfig"; path = "Target Support Files/Pods-RxBullsEye/Pods-RxBullsEye.debug.xcconfig"; sourceTree = "<group>"; };
 		6A5D3A4B305F8DFFDF8C1C97 /* Pods_RxBullsEye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxBullsEye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F852ED93C701D3B856E0BF6B /* Pods-RxBullsEye.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxBullsEye.release.xcconfig"; path = "Target Support Files/Pods-RxBullsEye/Pods-RxBullsEye.release.xcconfig"; sourceTree = "<group>"; };
@@ -110,6 +116,9 @@
 		0983446723DFD141005134E4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0983447523DFD8E0005134E4 /* ServiceProvider */,
+				0983447623DFD8EB005134E4 /* UserDefaultsService */,
+				0983447723DFD8F7005134E4 /* HallOfFameService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -136,6 +145,30 @@
 				0983446B23DFD25C005134E4 /* ReusableType.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		0983447523DFD8E0005134E4 /* ServiceProvider */ = {
+			isa = PBXGroup;
+			children = (
+				0983446F23DFD819005134E4 /* ServiceProviderType.swift */,
+			);
+			path = ServiceProvider;
+			sourceTree = "<group>";
+		};
+		0983447623DFD8EB005134E4 /* UserDefaultsService */ = {
+			isa = PBXGroup;
+			children = (
+				0983447123DFD850005134E4 /* UserDefaultsServiceType.swift */,
+			);
+			path = UserDefaultsService;
+			sourceTree = "<group>";
+		};
+		0983447723DFD8F7005134E4 /* HallOfFameService */ = {
+			isa = PBXGroup;
+			children = (
+				0983447323DFD867005134E4 /* HallOfFameServiceType.swift */,
+			);
+			path = HallOfFameService;
 			sourceTree = "<group>";
 		};
 		76FFCDD580362E48F1B3AFD1 /* Frameworks */ = {
@@ -272,6 +305,9 @@
 			files = (
 				0983446C23DFD25C005134E4 /* ReusableType.swift in Sources */,
 				0983445023DFCFBD005134E4 /* AppDelegate.swift in Sources */,
+				0983447223DFD850005134E4 /* UserDefaultsServiceType.swift in Sources */,
+				0983447023DFD819005134E4 /* ServiceProviderType.swift in Sources */,
+				0983447423DFD867005134E4 /* HallOfFameServiceType.swift in Sources */,
 				0983446E23DFD418005134E4 /* Record.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
