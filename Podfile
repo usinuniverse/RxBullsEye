@@ -7,4 +7,10 @@ target 'RxBullsEye' do
 
   # Pods for RxBullsEye
 
+  pod 'ReactorKit'
+  pod 'RxCocoa'
+  pod 'RxDataSources'
+  pod 'RxSwift'
+  pod 'RxUIAlert'
+
 end
