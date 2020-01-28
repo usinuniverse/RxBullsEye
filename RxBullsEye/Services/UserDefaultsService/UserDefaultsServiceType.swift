@@ -9,6 +9,8 @@
 import Foundation
 
 protocol UserDefaultsServiceType {
+    var serviceProvider: ServiceProviderType { get }
+    
     func set<T>(value: T, forKey key: String) -> Void
     func value(forKey key: String) -> Any?
 }
