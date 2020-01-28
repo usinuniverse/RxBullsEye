@@ -48,7 +48,7 @@ class HallOfFameService: HallOfFameServiceType {
                 records.forEach {
                     newRecords.append(Record(name: name, score: $0.score))
                 }
-                self?.serviceProvider.userDefaultsService.set(value: newRecords, forKey: UserDefaultsService.Key.hallOfFame.rawValue)
+                self?.serviceProvider.userDefaultsService.set(value: newRecords.map { $0.convertToDict() }, forKey: UserDefaultsService.Key.hallOfFame.rawValue)
                 self?.serviceProvider.userDefaultsService.set(value: name, forKey: UserDefaultsService.Key.name.rawValue)
                 return Observable.just(newRecords)
         }
