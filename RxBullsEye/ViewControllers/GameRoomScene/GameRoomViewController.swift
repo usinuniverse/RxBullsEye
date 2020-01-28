@@ -8,10 +8,20 @@
 
 import UIKit
 
-class GameRoomViewController: BaseViewController {
+import ReactorKit
+
+class GameRoomViewController: BaseViewController, StoryboardView {
+    // MARK: - Methods
+    // MARK: View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // MARK: Bind
+    
+    func bind(reactor: GameRoomViewReactor) {
+        
     }
     
 }

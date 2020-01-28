@@ -6,7 +6,13 @@
 //  Copyright © 2020 usinuniverse. All rights reserved.
 //
 
-import Foundation
+import ReactorKit
 
-class GameRoomViewReactor {}
+class GameRoomViewReactor: Reactor {
+    enum Action {}
+    enum Mutation {}
+    struct State {}
+    
+    var initialState = State()
+}
 

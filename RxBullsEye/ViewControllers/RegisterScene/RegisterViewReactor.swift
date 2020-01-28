@@ -6,7 +6,13 @@
 //  Copyright © 2020 usinuniverse. All rights reserved.
 //
 
-import Foundation
+import ReactorKit
 
-class RegisterViewReactor {}
+class RegisterViewReactor: Reactor {
+    enum Action {}
+    enum Mutation {}
+    struct State {}
+    
+    var initialState = State()
+}
 

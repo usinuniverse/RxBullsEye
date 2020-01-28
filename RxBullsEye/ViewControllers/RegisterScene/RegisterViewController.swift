@@ -8,10 +8,20 @@
 
 import UIKit
 
-class RegisterViewController: BaseViewController {
+import ReactorKit
+
+class RegisterViewController: BaseViewController, StoryboardView {
+    // MARK: - Methods
+    // MARK: View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // MARK: Bind
+    
+    func bind(reactor: RegisterViewReactor) {
+        
     }
     
 }
