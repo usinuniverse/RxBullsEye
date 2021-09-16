@@ -8,22 +8,17 @@
   <a href="https://github.com/ReactorKit/ReactorKit" target="_blank">
     <img alt="Platform" src="https://img.shields.io/cocoapods/p/ReactorKit.svg?style=flat">
   </a>
-  <a href="https://travis-ci.org/ReactorKit/ReactorKit" target="_blank">
-    <img alt="Build Status" src="https://travis-ci.org/ReactorKit/ReactorKit.svg?branch=master">
+  <a href="https://github.com/ReactorKit/ReactorKit/actions" target="_blank">
+    <img alt="CI" src="https://github.com/ReactorKit/ReactorKit/workflows/CI/badge.svg">
   </a>
   <a href="https://codecov.io/gh/ReactorKit/ReactorKit/" target="_blank">
     <img alt="Codecov" src="https://img.shields.io/codecov/c/github/ReactorKit/ReactorKit.svg">
-  </a>
-  <a href="http://reactorkit.io/docs/latest/" target="_blank">
-    <img alt="CocoaDocs" src="http://reactorkit.io/docs/latest/badge.svg">
   </a>
 </p>
 
 ReactorKit is a framework for a reactive and unidirectional Swift application architecture. This repository introduces the basic concept of ReactorKit and describes how to build an application using ReactorKit.
 
-You may want to see the [Examples](#examples) section first if you'd like to see the actual code. Visit the [API Reference](http://reactorkit.io/docs/latest/) for code-level documentation.
-
-For an overview of ReactorKit's features and the reasoning behind its creation, you may also check the slides from this introductory presentation over at [SlideShare](https://www.slideshare.net/devxoul/hello-reactorkit).
+You may want to see the [Examples](#examples) section first if you'd like to see the actual code. For an overview of ReactorKit's features and the reasoning behind its creation, you may also check the slides from this introductory presentation over at [SlideShare](https://www.slideshare.net/devxoul/hello-reactorkit).
 
 ## Table of Contents
 
@@ -35,6 +30,7 @@ For an overview of ReactorKit's features and the reasoning behind its creation, 
     * [Global States](#global-states)
     * [View Communication](#view-communication)
     * [Testing](#testing)
+    * [Scheduling](#scheduling)
 * [Examples](#examples)
 * [Dependencies](#dependencies)
 * [Requirements](#requirements)
@@ -272,7 +268,6 @@ First of all, you have to decide what to test. There are two things to test: a v
 A view can be tested with a *stub* reactor. A reactor has a property `stub` which can log actions and force change states. If a reactor's stub is enabled, both `mutate()` and `reduce()` are not executed. A stub has these properties:
 
 ```swift
-var isEnabled: Bool { get set }
 var state: StateRelay<Reactor.State> { get }
 var action: ActionSubject<Reactor.Action> { get }
 var actions: [Reactor.Action] { get } // recorded actions
@@ -284,7 +279,7 @@ Here are some example test cases:
 func testAction_refresh() {
   // 1. prepare a stub reactor
   let reactor = MyReactor()
-  reactor.stub.isEnabled = true
+  reactor.isStubEnabled = true
 
   // 2. prepare a view with a stub reactor
   let view = MyView()
@@ -300,7 +295,7 @@ func testAction_refresh() {
 func testState_isLoading() {
   // 1. prepare a stub reactor
   let reactor = MyReactor()
-  reactor.stub.isEnabled = true
+  reactor.isStubEnabled = true
 
   // 2. prepare a view with a stub reactor
   let view = MyView()
@@ -328,21 +323,47 @@ func testIsBookmarked() {
 }
 ```
 
-Sometimes a state is changed more than one time for a single action. For example, a `.refresh` action sets `state.isLoading` to `true` at first and sets to `false` after the refreshing. In this case it's difficult to test `state.isLoading` with `currentState` so you might need to use [RxTest](https://github.com/ReactiveX/RxSwift) or [RxExpect](https://github.com/devxoul/RxExpect). Here is an example test case using RxExpect:
+Sometimes a state is changed more than one time for a single action. For example, a `.refresh` action sets `state.isLoading` to `true` at first and sets to `false` after the refreshing. In this case it's difficult to test `state.isLoading` with `currentState` so you might need to use [RxTest](https://github.com/ReactiveX/RxSwift) or [RxExpect](https://github.com/devxoul/RxExpect). Here is an example test case using RxSwift:
 
 ```swift
 func testIsLoading() {
-  RxExpect("it should change isLoading") { test in
-    let reactor = test.retain(MyReactor())
-    test.input(reactor.action, [
-      next(100, .refresh) // send .refresh at 100 scheduler time
+  // given
+  let scheduler = TestScheduler(initialClock: 0)
+  let reactor = MyReactor()
+  let disposeBag = DisposeBag()
+
+  // when
+  scheduler
+    .createHotObservable([
+      .next(100, .refresh) // send .refresh at 100 scheduler time
     ])
-    test.assert(reactor.state.map { $0.isLoading })
-      .since(100) // values since 100 scheduler time
-      .assert([
-        true,  // just after .refresh
-        false, // after refreshing
-      ])
+    .subscribe(reactor.action)
+    .disposed(by: disposeBag)
+
+  // then
+  let response = scheduler.start(created: 0, subscribed: 0, disposed: 1000) {
+    reactor.state.map(\.isLoading)
+  }
+  XCTAssertEqual(response.events.map(\.value.element), [
+    false, // initial state
+    true,  // just after .refresh
+    false  // after refreshing
+  ])
+}
+```
+
+### Scheduling
+
+Define `scheduler` property to specify which scheduler is used for reducing and observing the state stream. Note that this queue **must be** a serial queue. The default scheduler is `CurrentThreadScheduler`.
+
+```swift
+final class MyReactor: Reactor {
+  let scheduler: Scheduler = SerialDispatchQueueScheduler(qos: .default)
+
+  func reduce(state: State, mutation: Mutation) -> State {
+    // executed in a background thread
+    heavyAndImportantCalculation()
+    return state
   }
 }
 ```
@@ -357,6 +378,8 @@ func testIsLoading() {
 * [Passcode](https://github.com/cruisediary/Passcode): Passcode for iOS RxSwift, ReactorKit and IGListKit example
 * [Flickr Search](https://github.com/TaeJoongYoon/FlickrSearch): A simple application which provides a Flickr Photo search with RxSwift and ReactorKit
 * [ReactorKitExample](https://github.com/gre4ixin/ReactorKitExample)
+* [reactorkit-keyboard-example](https://github.com/techinpark/reactorkit-keyboard-example): iOS Application example for develop keyboard-extensions using ReactorKit Architecture.
+* [SWHub](https://github.com/tospery/SWHub): Use ReactorKit develop the Github client
 
 ## Dependencies
 
@@ -434,7 +457,11 @@ Any discussions and pull requests are welcomed 💖
   <a href="https://www.constantcontact.com"><img align="center" height="44" alt="Constant Contact" hspace="15" src="https://user-images.githubusercontent.com/931655/43634090-2cb30c7e-9746-11e8-8e18-e4fcf87a08cc.png"></a>
   <a href="https://www.kt.com"><img align="center" height="42" alt="KT" hspace="15" src="https://user-images.githubusercontent.com/931655/43634093-2ec9e94c-9746-11e8-9213-75c352e0c147.png"></a>
   <br><br>
-  <a href="https://hyperconnect.com/"><img align="center" height="48" alt="Hyperconnect" hspace="15" src="https://user-images.githubusercontent.com/931655/50819891-aa89d200-136e-11e9-8b19-780e64e54b2a.png"></a>
+  <a href="https://hyperconnect.com/"><img align="center" height="62" alt="Hyperconnect" hspace="15" src="https://user-images.githubusercontent.com/931655/50819891-aa89d200-136e-11e9-8b19-780e64e54b2a.png"></a>
+  <a href="https://toss.im/career/?category=engineering&positionId=7"><img align="center" height="28" alt="Toss" hspace="15" src="https://user-images.githubusercontent.com/931655/65512318-ede39b00-df13-11e9-874c-f1e478bda6c8.png"></a>
+  <a href="https://pay.line.me"><img align="center" height="58" alt="LINE Pay" hspace="15" src="https://user-images.githubusercontent.com/68603/68569839-7efdd980-04a2-11ea-8d7e-673831b1b658.png"></a>
+  <br><br>
+  <a href="https://www.gccompany.co.kr/"><img align="center" height="45" alt="LINE Pay" hspace="15" src="https://user-images.githubusercontent.com/931655/84870371-32beeb80-b0ba-11ea-8530-0dc71c4e385e.png"></a>
   <br><br>
 </p>
 

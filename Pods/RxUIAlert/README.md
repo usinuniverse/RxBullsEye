@@ -9,42 +9,6 @@ We have made it easy to implement UIAlertController using RxSwift.
 |:-------|:---|
 |travis CI|[![](https://travis-ci.org/RxSwiftCommunity/RxAlert.svg?branch=master)](https://travis-ci.org/RxSwiftCommunity/RxAlert)|
 
-## Carthage
-
-Add following to Cartfile:
-
-```
-github "RxSwiftCommunity/RxAlert"
-```
-
-## carthage tutorial
-Add as below image.
-
-![](./doc/tutorial.png)
-
-If you do not do this, the following log will be output
-
-```bash
-Reason: image not found
-```
-App hung😱!
-
-
-## Cocoapods
-
-[Cocoapods RxUIAlert](https://cocoapods.org/pods/RxUIAlert)
-
-edit Podfile:
-
-```
-vi $(PROJECT_ROOT)/Podfile
-```
-
-Add one line following 
-
-```
-pod 'RxUIAlert'
-```
 
 ## Use it
 
@@ -59,29 +23,61 @@ $ git clone git@github.com:RxSwiftCommunity/RxAlert.git
 $ git clone https://github.com/RxSwiftCommunity/RxAlert.git
 ```
 
+## Carthage
 
-## Before use it
+Add following to Cartfile:
 
-Execute the following CLI.
+```
+github "RxSwiftCommunity/RxAlert"
+```
 
-If not, please [install it](https://cocoapods.org/).
+## Cocoapods
+
+[CocoaPods](https://cocoapods.org/) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate RxAlert into your Xcode project using CocoaPods, add following line to the Podfile
+
+```
+pod 'RxUIAlert'
+```
+
+## Usage
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
 
 
 ```
-$ pod install
+pod install 
 ```
 
 ## Sample code
 
 ```
-alert(title: "RxAlert",
-              message: "RxAlert Message",
-              actions: [AlertAction(title: "OK", type: 0, style: .default)],
-              vc: self).observeOn(MainScheduler.instance)
-            .subscribe(onNext: { index in
-                print ("index: \(index)")
-                
-            }).disposed(by: disposeBag)
+// normal alert
+rx.alert(title: "RxAlert",
+         message: "We have made it easy to implement UIAlertController using RxSwift.")
+   .subscribe()
+   .disposed(by: disposeBag)
+
+// textField
+rx.alert(title: "RxAlert",
+         message: "We have made it easy to implement UIAlertController using RxSwift.",
+         actions: [AlertAction(title: "OK", type: 0, style: .default),
+                   AlertAction(textField: UITextField(), placeholder: "user name"),
+                   AlertAction(textField: UITextField(), placeholder: "password")])
+    .subscribe(onNext: { (output) in
+        output.textFields?.forEach {
+            print ($0.text as? String?)
+        }})
+    .disposed(by: disposeBag)
+
+// actionsheet
+rx.alert(title: "RxAlert",
+         message: "RxAlert Message",
+         preferredStyle: .actionSheet)
+    .observeOn(MainScheduler.instance)
+    .subscribe(onNext: { index in
+        print("index: \(index)")
+    }).disposed(by: disposeBag)
+
 ```
 
 [LICENCE](https://github.com/RxSwiftCommunity/RxAlert/blob/master/LICENSE)
