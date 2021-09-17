@@ -45,7 +45,7 @@ class HallOfFameService: HallOfFameServiceType {
     func update(name: String) -> Observable<[Record]> {
         return read()
             .withUnretained(self)
-            .do(onNext: { weakSelf, _ in
+            .do(afterNext: { weakSelf, _ in
                 weakSelf.event.onNext(.update)
             })
             .flatMap { weakSelf, records -> Observable<[Record]> in

@@ -62,7 +62,7 @@ class RegisterViewReactor: Reactor {
             }
             
         case .done:
-            return self.serviceProvider.hallOfFameService.update(name: self.currentState.name)
+            return serviceProvider.hallOfFameService.update(name: currentState.name)
                 .flatMap { _ -> Observable<Mutation> in
                     return .just(.dismiss)
             }
