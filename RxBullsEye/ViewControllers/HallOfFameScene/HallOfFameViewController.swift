@@ -38,7 +38,7 @@ class HallOfFameViewController: BaseViewController, StoryboardView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.configureTableView()
+        configureTableView()
     }
     
     // MARK: Configure

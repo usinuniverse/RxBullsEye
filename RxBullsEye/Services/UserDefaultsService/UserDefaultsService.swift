@@ -31,10 +31,10 @@ class UserDefaultsService: UserDefaultsServiceType {
     // MARK: - Methods
     
     func set<T>(value: T, forKey key: String) {
-        self.userDefaults.set(value, forKey: key)
+        userDefaults.set(value, forKey: key)
     }
     
     func value(forKey key: String) -> Any? {
-        return self.userDefaults.value(forKey: key)
+        return userDefaults.value(forKey: key)
     }
 }

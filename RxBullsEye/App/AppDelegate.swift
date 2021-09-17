@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let serviceProvider = ServiceProvider()
         let reactor = GameRoomViewReactor(serviceProvider: serviceProvider)
         let gameRoomViewController = ViewControllers.gameRoom(reactor).instantiate()
-        self.window?.rootViewController = gameRoomViewController
+        window?.rootViewController = gameRoomViewController
         return true
     }
 }

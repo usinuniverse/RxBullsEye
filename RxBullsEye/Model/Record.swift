@@ -22,9 +22,9 @@ struct Record: IdentifiableType, Equatable {
     }
     
     init(dictionary: [String: Any]) {
-        self.name = dictionary["name"] as? String ?? ""
-        self.score = dictionary["score"] as? Int ?? 0
-        self.identity = dictionary["identity"] as? String ?? UUID().uuidString
+        name = dictionary["name"] as? String ?? ""
+        score = dictionary["score"] as? Int ?? 0
+        identity = dictionary["identity"] as? String ?? UUID().uuidString
     }
     
     func convertToDict() -> [String: Any] {

@@ -102,6 +102,6 @@ class GameRoomViewReactor: Reactor {
 
 extension GameRoomViewReactor {
     func createHallOfFameViewReactor() -> HallOfFameViewReactor {
-        return HallOfFameViewReactor(serviceProvider: self.serviceProvider)
+        return HallOfFameViewReactor(serviceProvider: serviceProvider)
     }
 }
