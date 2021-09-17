@@ -14,12 +14,12 @@ class RecordTableViewCell: UITableViewCell {
     
     var score: Int? {
         willSet {
-            self.scoreLabel.text = "\(newValue ?? 0)"
+            scoreLabel.text = "\(newValue ?? 0)"
         }
     }
     var name: String? {
         willSet {
-            self.nameLabel.text = newValue
+            nameLabel.text = newValue
         }
     }
     
@@ -41,8 +41,8 @@ class RecordTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.scoreLabel.text = nil
-        self.nameLabel.text = nil
+        scoreLabel.text = nil
+        nameLabel.text = nil
     }
     
 }

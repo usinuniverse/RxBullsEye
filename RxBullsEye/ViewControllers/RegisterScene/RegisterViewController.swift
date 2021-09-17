@@ -18,12 +18,6 @@ class RegisterViewController: BaseViewController, StoryboardView {
     @IBOutlet private weak var textField: UITextField!
     
     // MARK: - Methods
-    // MARK: View Life Cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     // MARK: Bind
     
     func bind(reactor: RegisterViewReactor) {
@@ -31,44 +25,44 @@ class RegisterViewController: BaseViewController, StoryboardView {
         Observable.just(())
             .map { Reactor.Action.viewDidLoad }
             .bind(to: reactor.action)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
-        let cancelButton = self.setNavigationBarButton(type: .cancel, at: .left)
+        let cancelButton = setNavigationBarButton(type: .cancel, at: .left)
         cancelButton.rx.tap
             .map { Reactor.Action.cancel }
             .bind(to: reactor.action)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
-        let doneButton = self.setNavigationBarButton(type: .done, at: .right)
+        let doneButton = setNavigationBarButton(type: .done, at: .right)
         doneButton.rx.tap
             .map { Reactor.Action.done }
             .bind(to: reactor.action)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
-        self.textField.rx.text.changed
+        textField.rx.text.changed
             .distinctUntilChanged()
             .map { Reactor.Action.textChanged($0) }
             .bind(to: reactor.action)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
         // State
         reactor.state.map { $0.name }
             .distinctUntilChanged()
-            .bind(to: self.textField.rx.text)
-            .disposed(by: self.disposeBag)
+            .bind(to: textField.rx.text)
+            .disposed(by: disposeBag)
         
         reactor.state.map { $0.isDismiss }
             .distinctUntilChanged()
-            .subscribe(onNext: { [weak self] isDismiss in
-                guard isDismiss else { return }
-                self?.dismiss(animated: true)
+            .filter({ $0 })
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, _ in
+                weakSelf.dismiss(animated: true)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
         reactor.state.map { $0.isEnableDone }
             .distinctUntilChanged()
             .bind(to: doneButton.rx.isEnabled)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
-    
 }

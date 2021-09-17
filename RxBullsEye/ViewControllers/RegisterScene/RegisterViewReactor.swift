@@ -48,23 +48,23 @@ class RegisterViewReactor: Reactor {
     func mutate(action: RegisterViewReactor.Action) -> Observable<RegisterViewReactor.Mutation> {
         switch action {
         case .viewDidLoad:
-            let name = self.serviceProvider.userDefaultsService.value(forKey: UserDefaultsService.Key.name.rawValue) as? String ?? "Guest"
-            return Observable.just(.setName(name))
+            let name = serviceProvider.userDefaultsService.value(forKey: UserDefaultsService.Key.name.rawValue) as? String ?? "Guest"
+            return .just(.setName(name))
         
         case .cancel:
-            return Observable.just(.dismiss)
+            return .just(.dismiss)
             
         case .textChanged(let text):
             if text != nil && text != "" {
-                return Observable.of(.setName(text ?? ""), .setIsEnableDone(true))
+                return .of(.setName(text ?? ""), .setIsEnableDone(true))
             } else {
-                return Observable.of(.setName(""), .setIsEnableDone(false))
+                return .of(.setName(""), .setIsEnableDone(false))
             }
             
         case .done:
             return self.serviceProvider.hallOfFameService.update(name: self.currentState.name)
                 .flatMap { _ -> Observable<Mutation> in
-                    return Observable.just(.dismiss)
+                    return .just(.dismiss)
             }
         }
     }
@@ -85,6 +85,5 @@ class RegisterViewReactor: Reactor {
         
         return state
     }
-    
 }
 

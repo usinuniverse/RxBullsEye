@@ -22,50 +22,52 @@ class HallOfFameService: HallOfFameServiceType {
     }
     
     func create(record: Record) -> Observable<Record> {
-        return self.read()
-            .flatMap { [weak self] records -> Observable<Record> in
+        return read()
+            .withUnretained(self)
+            .flatMap { weakSelf, records -> Observable<Record> in
                 var records = records
                 records.append(record)
                 records.sort { $0.score > $1.score }
-                self?.serviceProvider.userDefaultsService.set(value: records.map({ $0.convertToDict() }), forKey: UserDefaultsService.Key.hallOfFame.rawValue)
-                return Observable.just(record)
+                weakSelf.serviceProvider.userDefaultsService.set(value: records.map({ $0.convertToDict() }), forKey: UserDefaultsService.Key.hallOfFame.rawValue)
+                return .just(record)
         }
     }
     
     func read() -> Observable<[Record]> {
-        if let savedRecords = self.serviceProvider.userDefaultsService.value(forKey: UserDefaultsService.Key.hallOfFame.rawValue) as? [[String: Any]] {
+        if let savedRecords = serviceProvider.userDefaultsService.value(forKey: UserDefaultsService.Key.hallOfFame.rawValue) as? [[String: Any]] {
             let records = savedRecords.map { Record(dictionary: $0) }
-            return Observable.just(records)
+            return .just(records)
         } else {
-            return Observable.just([])
+            return .just([])
         }
     }
     
     func update(name: String) -> Observable<[Record]> {
-        return self.read()
-            .flatMap { [weak self] records -> Observable<[Record]> in
+        return read()
+            .withUnretained(self)
+            .do(onNext: { weakSelf, _ in
+                weakSelf.event.onNext(.update)
+            })
+            .flatMap { weakSelf, records -> Observable<[Record]> in
                 var newRecords = [Record]()
                 records.forEach {
                     newRecords.append(Record(name: name, score: $0.score))
                 }
-                self?.serviceProvider.userDefaultsService.set(value: newRecords.map { $0.convertToDict() }, forKey: UserDefaultsService.Key.hallOfFame.rawValue)
-                self?.serviceProvider.userDefaultsService.set(value: name, forKey: UserDefaultsService.Key.name.rawValue)
-                return Observable.just(newRecords)
-        }
-        .do(onNext: { [weak self] _ in
-            self?.event.onNext(.update)
-        })
+                weakSelf.serviceProvider.userDefaultsService.set(value: newRecords.map { $0.convertToDict() }, forKey: UserDefaultsService.Key.hallOfFame.rawValue)
+                weakSelf.serviceProvider.userDefaultsService.set(value: name, forKey: UserDefaultsService.Key.name.rawValue)
+                return .just(newRecords)
+            }
     }
     
     func delete(at index: Int) -> Observable<Record> {
-        return self.read()
-            .flatMap { [weak self] records -> Observable<Record> in
+        return read()
+            .withUnretained(self)
+            .flatMap { weakSelf, records -> Observable<Record> in
                 var records = records
                 let removedRecord = records.remove(at: index)
-                self?.serviceProvider.userDefaultsService.set(value: records.map { $0.convertToDict() }, forKey: UserDefaultsService.Key.hallOfFame.rawValue)
-                return Observable.just(removedRecord)
+                weakSelf.serviceProvider.userDefaultsService.set(value: records.map { $0.convertToDict() }, forKey: UserDefaultsService.Key.hallOfFame.rawValue)
+                return .just(removedRecord)
         }
     }
-    
 }
 

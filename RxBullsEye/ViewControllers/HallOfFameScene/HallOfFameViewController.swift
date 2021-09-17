@@ -44,56 +44,55 @@ class HallOfFameViewController: BaseViewController, StoryboardView {
     // MARK: Configure
     
     private func configureTableView() {
-        self.tableView.register(UINib(nibName: RecordTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: RecordTableViewCell.identifier)
-        self.tableView.register(UINib(nibName: RecordTableHeaderView.identifier, bundle: nil), forHeaderFooterViewReuseIdentifier: RecordTableHeaderView.identifier)
-        self.tableView.tableFooterView = UIView()
+        tableView.register(UINib(nibName: RecordTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: RecordTableViewCell.identifier)
+        tableView.register(UINib(nibName: RecordTableHeaderView.identifier, bundle: nil), forHeaderFooterViewReuseIdentifier: RecordTableHeaderView.identifier)
+        tableView.tableFooterView = UIView()
     }
     
     // MARK: Bind
     
     func bind(reactor: HallOfFameViewReactor) {
         // Delegate
-        self.tableView.rx.setDelegate(self)
-            .disposed(by: self.disposeBag)
+        tableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
         
         // Action
-        let registerButton = self.setNavigationBarButton(type: .register, at: .right)
+        let registerButton = setNavigationBarButton(type: .register, at: .right)
         registerButton.rx.tap
             .map { reactor.createRegisterViewReactor() }
-            .subscribe(onNext: { [weak self] reactor in
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, reactor in
                 let registerViewController = ViewControllers.register(reactor).instantiate()
-                self?.present(registerViewController, animated: true)
+                weakSelf.present(registerViewController, animated: true)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
         Observable.just(())
             .map { Reactor.Action.refresh }
             .bind(to: reactor.action)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
-        self.tableView.rx.itemDeleted
+        tableView.rx.itemDeleted
             .map { Reactor.Action.delete($0.row) }
             .bind(to: reactor.action)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
         // State
         reactor.state.map { $0.title }
             .distinctUntilChanged()
-            .bind(to: self.navigationItem.rx.title)
-            .disposed(by: self.disposeBag)
+            .bind(to: navigationItem.rx.title)
+            .disposed(by: disposeBag)
         
         reactor.state.map { $0.records }
-            .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
-            .disposed(by: self.disposeBag)
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
     }
-    
 }
 
 // MARK: - Extension
 // MARK: UITableViewDelegate
 
 extension HallOfFameViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: RecordTableHeaderView.identifier) as? RecordTableHeaderView
         return headerView
@@ -106,5 +105,4 @@ extension HallOfFameViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
     }
-    
 }

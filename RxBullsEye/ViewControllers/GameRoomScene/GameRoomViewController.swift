@@ -23,103 +23,95 @@ class GameRoomViewController: BaseViewController, StoryboardView {
     @IBOutlet private weak var checkButton: UIButton!
     
     // MARK: - Methods
-    // MARK: View Life Cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     // MARK: Bind
     
     func bind(reactor: GameRoomViewReactor) {
         // Action
-        let startButton = self.setNavigationBarButton(type: .start, at: .left)
+        let startButton = setNavigationBarButton(type: .start, at: .left)
         startButton.rx.tap
             .map { Reactor.Action.start }
             .bind(to: reactor.action)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
-        let hallOfFameButton = self.setNavigationBarButton(type: .hallOfFame, at: .right)
+        let hallOfFameButton = setNavigationBarButton(type: .hallOfFame, at: .right)
         hallOfFameButton.rx.tap
             .map { reactor.createHallOfFameViewReactor() }
-            .subscribe(onNext: { [weak self] reactor in
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, reactor in
                 let hallOfFameViewController = ViewControllers.hallOfFame(reactor).instantiate()
-                self?.navigationController?.pushViewController(hallOfFameViewController, animated: true)
+                weakSelf.navigationController?.pushViewController(hallOfFameViewController, animated: true)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
-        self.checkButton.rx.tap
+        checkButton.rx.tap
             .map { Reactor.Action.check }
             .bind(to: reactor.action)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
-        self.slider.rx.value
+        slider.rx.value
             .map { Reactor.Action.sliderValueChanged($0) }
             .bind(to: reactor.action)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
         // State
         reactor.state.map { $0.title }
             .distinctUntilChanged()
-            .bind(to: self.navigationItem.rx.title)
-            .disposed(by: self.disposeBag)
+            .bind(to: navigationItem.rx.title)
+            .disposed(by: disposeBag)
         
         reactor.state.map { "\($0.count)" }
-            .bind(to: self.countLabel.rx.text)
-            .disposed(by: self.disposeBag)
+            .bind(to: countLabel.rx.text)
+            .disposed(by: disposeBag)
         
         reactor.state.map { $0.previousNumber == 0 ? "-" : "\($0.previousNumber)" }
             .distinctUntilChanged()
-            .bind(to: self.previousNumberLabel.rx.text)
-            .disposed(by: self.disposeBag)
+            .bind(to: previousNumberLabel.rx.text)
+            .disposed(by: disposeBag)
         
         reactor.state.map { "\($0.goalNumber)" }
             .filter { $0 != "0" }
             .distinctUntilChanged()
-            .bind(to: self.goalNumberLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        
-        reactor.state.map { !$0.isPlaying }
-            .distinctUntilChanged()
-            .bind(to: startButton.rx.isEnabled)
-            .disposed(by: self.disposeBag)
+            .bind(to: goalNumberLabel.rx.text)
+            .disposed(by: disposeBag)
         
         reactor.state.map { $0.isPlaying }
             .distinctUntilChanged()
-            .bind(to: self.slider.rx.isEnabled)
-            .disposed(by: self.disposeBag)
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, isPlaying in
+                startButton.isEnabled = !isPlaying
+                weakSelf.slider.isEnabled = isPlaying
+                weakSelf.checkButton.isEnabled = isPlaying
+            })
+            .disposed(by: disposeBag)
         
         reactor.state.map { $0.sliderValue }
             .distinctUntilChanged()
-            .bind(to: self.slider.rx.value)
-            .disposed(by: self.disposeBag)
-        
-        reactor.state.map { $0.isPlaying }
-            .distinctUntilChanged()
-            .bind(to: self.checkButton.rx.isEnabled)
-            .disposed(by: self.disposeBag)
+            .bind(to: slider.rx.value)
+            .disposed(by: disposeBag)
         
         reactor.state.map { $0.isFinish }
             .distinctUntilChanged()
-            .subscribe(onNext: { [weak self] isFinish in
-                guard isFinish else { return }
-                guard let self = self else { return }
-                self.alert(
+            .filter { $0 }
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, _ in
+                weakSelf.rx.alert(
                     title: "🎉정답!!🎉",
-                    message: "축하합니다!. \(reactor.currentState.count)회 만에 정답을 맞추셨네요!\n바로 순위를 확인하실래요?",
-                    actions: [AlertAction(title: "취소", type: 0, style: .cancel),
-                              AlertAction(title: "확인", type: 1, style: .default)],
-                    preferredStyle: .alert, vc: self)
-                    .observeOn(MainScheduler.instance)
-                    .subscribe(onNext: { [weak self] type in
-                        guard type == 1 else { return }
-                        let reactor = reactor.createHallOfFameViewReactor()
-                        let hallOfFameViewController = ViewControllers.hallOfFame(reactor).instantiate()
-                        self?.navigationController?.pushViewController(hallOfFameViewController, animated: true)
-                    })
-                    .disposed(by: self.disposeBag)
+                    message: "축하합니다!.\n\(reactor.currentState.count)회 만에 정답을 맞추셨네요!\n바로 순위를 확인하실래요?",
+                    actions: [
+                        .init(title: "취소", type: 0, style: .cancel),
+                        .init(title: "확인", type: 1, style: .default)
+                    ],
+                    preferredStyle: .alert,
+                    vc: weakSelf
+                )
+                .filter({ $0.index == 1 })
+                .subscribe(onNext: { _ in
+                    let reactor = reactor.createHallOfFameViewReactor()
+                    let hallOfFameViewController = ViewControllers.hallOfFame(reactor).instantiate()
+                    weakSelf.navigationController?.pushViewController(hallOfFameViewController, animated: true)
+                })
+                .disposed(by: weakSelf.disposeBag)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
-    
 }

@@ -44,16 +44,16 @@ class HallOfFameViewReactor: Reactor {
     func mutate(action: HallOfFameViewReactor.Action) -> Observable<HallOfFameViewReactor.Mutation> {
         switch action {
         case .refresh:
-            return self.serviceProvider.hallOfFameService.read()
+            return serviceProvider.hallOfFameService.read()
                 .flatMap { records -> Observable<Mutation> in
                     let sectionOfRecord = SectionOfRecord(items: records)
-                    return Observable.just(.setRecords([sectionOfRecord]))
+                    return .just(.setRecords([sectionOfRecord]))
             }
             
         case .delete(let index):
-            return self.serviceProvider.hallOfFameService.delete(at: index)
+            return serviceProvider.hallOfFameService.delete(at: index)
                 .flatMap { _ -> Observable<Mutation> in
-                    return Observable.just(.deleteRecord(index))
+                    return .just(.deleteRecord(index))
             }
         }
     }
@@ -61,10 +61,10 @@ class HallOfFameViewReactor: Reactor {
     func mutate(event: HallOfFameEvent) -> Observable<HallOfFameViewReactor.Mutation> {
         switch event {
         case .update:
-            return self.serviceProvider.hallOfFameService.read()
+            return serviceProvider.hallOfFameService.read()
                 .flatMap { records -> Observable<Mutation> in
                     let sectionOfRecord = SectionOfRecord(items: records)
-                    return Observable.just(.setRecords([sectionOfRecord]))
+                    return .just(.setRecords([sectionOfRecord]))
             }
         }
     }
@@ -90,10 +90,11 @@ class HallOfFameViewReactor: Reactor {
         
         return state
     }
-    
+}
+
+extension HallOfFameViewReactor {
     func createRegisterViewReactor() -> RegisterViewReactor {
-        return RegisterViewReactor(serviceProvider: self.serviceProvider)
+        return RegisterViewReactor(serviceProvider: serviceProvider)
     }
-    
 }
 

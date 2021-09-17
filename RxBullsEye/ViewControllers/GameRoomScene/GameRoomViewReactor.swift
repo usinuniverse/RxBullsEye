@@ -53,20 +53,20 @@ class GameRoomViewReactor: Reactor {
     func mutate(action: GameRoomViewReactor.Action) -> Observable<GameRoomViewReactor.Mutation> {
         switch action {
         case .start:
-            return Observable.just(.startGame(Int.random(in: 1...100)))
+            return .just(.startGame(Int.random(in: 1...100)))
             
         case .sliderValueChanged(let value):
-            return Observable.just(.setSlider(value))
+            return .just(.setSlider(value))
             
         case .check:
-            if self.currentState.goalNumber == Int(self.currentState.sliderValue) {
-                let name = self.serviceProvider.userDefaultsService.value(forKey: UserDefaultsService.Key.name.rawValue) as? String
-                return self.serviceProvider.hallOfFameService.create(record: Record(name: name ?? "Guest", score: 101 - self.currentState.count))
+            if currentState.goalNumber == Int(currentState.sliderValue) {
+                let name = serviceProvider.userDefaultsService.value(forKey: UserDefaultsService.Key.name.rawValue) as? String
+                return serviceProvider.hallOfFameService.create(record: Record(name: name ?? "Guest", score: 101 - currentState.count))
                     .flatMap { _ -> Observable<Mutation> in
-                        return Observable.just(.endGame)
+                        return .just(.endGame)
                 }
             } else {
-                return Observable.of(.increaseCount, .setSlider(50), .setPreviousNumber(Int(self.currentState.sliderValue)))
+                return .of(.increaseCount, .setSlider(50), .setPreviousNumber(Int(currentState.sliderValue)))
             }
         }
     }
@@ -98,10 +98,10 @@ class GameRoomViewReactor: Reactor {
         
         return state
     }
-    
+}
+
+extension GameRoomViewReactor {
     func createHallOfFameViewReactor() -> HallOfFameViewReactor {
         return HallOfFameViewReactor(serviceProvider: self.serviceProvider)
     }
-    
 }
-

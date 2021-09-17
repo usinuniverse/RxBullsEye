@@ -37,5 +37,4 @@ class UserDefaultsService: UserDefaultsServiceType {
     func value(forKey key: String) -> Any? {
         return self.userDefaults.value(forKey: key)
     }
-    
 }

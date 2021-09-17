@@ -28,9 +28,8 @@ struct Record: IdentifiableType, Equatable {
     }
     
     func convertToDict() -> [String: Any] {
-        return ["name": self.name, "score": self.score, "identity": self.identity]
+        return ["name": name, "score": score, "identity": identity]
     }
-    
 }
 
 struct SectionOfRecord {

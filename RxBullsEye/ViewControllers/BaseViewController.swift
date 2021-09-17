@@ -59,13 +59,12 @@ class BaseViewController: UIViewController {
         
         switch side {
         case .left:
-            self.navigationItem.leftBarButtonItem = barButtonItem
+            navigationItem.leftBarButtonItem = barButtonItem
             
         case .right:
-            self.navigationItem.rightBarButtonItem = barButtonItem
+            navigationItem.rightBarButtonItem = barButtonItem
         }
         
         return button
     }
-    
 }
