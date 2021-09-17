@@ -59,7 +59,7 @@ class GameRoomViewReactor: Reactor {
             return .just(.setSlider(value))
             
         case .check:
-            if currentState.goalNumber == Int(currentState.sliderValue) {
+            if currentState.goalNumber == Int(currentState.sliderValue.rounded(.toNearestOrEven)) {
                 let name = serviceProvider.userDefaultsService.value(forKey: UserDefaultsService.Key.name.rawValue) as? String
                 return serviceProvider.hallOfFameService.create(record: Record(name: name ?? "Guest", score: 101 - currentState.count))
                     .flatMap { _ -> Observable<Mutation> in
