@@ -70,9 +70,10 @@ class HallOfFameViewReactor: Reactor {
     }
     
     func transform(mutation: Observable<HallOfFameViewReactor.Mutation>) -> Observable<HallOfFameViewReactor.Mutation> {
-        let hallOfFameEvent = self.serviceProvider.hallOfFameService.event
-            .flatMap { [weak self] event -> Observable<Mutation> in
-                self?.mutate(event: event) ?? .empty()
+        let hallOfFameEvent = serviceProvider.hallOfFameService.event
+            .withUnretained(self)
+            .flatMap { weakSelf, event -> Observable<Mutation> in
+                weakSelf.mutate(event: event)
         }
         return Observable.of(mutation, hallOfFameEvent).merge()
     }
